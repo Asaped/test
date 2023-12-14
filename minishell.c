@@ -12,7 +12,7 @@ static size_t	ft_strlen(const char *s)
 
 static void	error_exit(const char *err_message)
 {
-	printf(R "Error: " RST);
+	printf("Error: ");
 	printf("%s\n", err_message);
 	exit(1);
 }
@@ -49,7 +49,7 @@ static void	*safe_malloc(size_t bytes)
 {
 	count_operator 
 }
-
+*/
 static char	**parse_args(t_list *info, char *input)
 {
 	info.token =
@@ -57,7 +57,7 @@ static char	**parse_args(t_list *info, char *input)
 		return (NULL);
 	res[0] = set_word(input);
 	res[1] = set_operator;
-}*/
+}
 
 static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -90,7 +90,7 @@ static int	is_command(char *str)
 		return (1);
 	else if (!ft_memcmp(str, "exit", ft_strlen(str)))
 		return (1);
-	return (0)
+	return (0);
 }
 
 static char	*set_command(char *input)
@@ -98,12 +98,18 @@ static char	*set_command(char *input)
 	char	*str;
 	int		len;
 
+	len = 0;
 	while (input[len] && input[len] != ' ')
 		len++;
+	if (!input[len + 1])
+		error_exit("Missing argument.");
+	printf("len = %i\n", len);
 	str = safe_malloc(sizeof(char) * (len + 1));
 	ft_strlcpy(str, input, len + 1);
 	if (!is_command(str))
-		error_exit("Command not found");
+		error_exit("Command not found.");
+	while (*input && *input != ' ')
+		input++;
 	return (str);
 }
 
@@ -114,12 +120,12 @@ int main()
 
 	
 	write(1, "$> ", 3);
-    res = get_next_line(0);
-    while (res)
+    input = get_next_line(0);
+    while (input)
     {
-		info.command = set_command(input)
-		//info.token = parse_args(&info, input);
+		info.command = set_command(input);
+		info.token = parse_args(&info, input);
 		free(input);
-    	res = get_next_line(0);
+    	input = get_next_line(0);
     }
 }
