@@ -1,6 +1,12 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <stdlib.h>
+# include "gnl/get_next_line.h"
+
 typedef struct s_token
 {
     char    *word;
@@ -14,9 +20,5 @@ typedef	struct	s_list
 	t_token	*token;
 }				t_list;
 
-# include <stdio.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include "gnl/get_next_line.h"
 
 # endif
