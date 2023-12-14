@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+static size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
 static void	error_exit(const char *err_message)
 {
 	printf(R "Error: " RST);
@@ -66,19 +76,19 @@ static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 static int	is_command(char *str)
 {
-	if (!ft_memcmp(str, "echo"))
+	if (!ft_memcmp(str, "echo", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "pwd"))
+	else if (!ft_memcmp(str, "pwd", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "cd"))
+	else if (!ft_memcmp(str, "cd", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "export"))
+	else if (!ft_memcmp(str, "export", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "unset"))
+	else if (!ft_memcmp(str, "unset", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "env"))
+	else if (!ft_memcmp(str, "env", ft_strlen(str)))
 		return (1);
-	else if (!ft_memcmp(str, "exit"))
+	else if (!ft_memcmp(str, "exit", ft_strlen(str)))
 		return (1);
 	return (0)
 }
